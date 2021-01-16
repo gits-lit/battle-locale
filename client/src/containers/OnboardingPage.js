@@ -1,5 +1,5 @@
 import React from 'react';
-import OnboardingPage from '../components/LoadingPage';
+import OnboardingPage from '../components/OnboardingPage';
 
 const OnboardingPageContainer = (props) => {
   return (
