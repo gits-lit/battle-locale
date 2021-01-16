@@ -18,7 +18,7 @@ const MapComponent = (props) => {
         position: 'absolute',
         right: '0'
       }}
-      center={[-117.2340, 32.8801]}
+      center={[-117.2201226, 32.860568]}
       flyToOptions={{
         speed: 0
       }}
