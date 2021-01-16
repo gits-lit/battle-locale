@@ -3,8 +3,8 @@ const api = {
     spells: ["some spell"],
     spellTomes: {
         "id": {
-            lat: 0,
-            long: 0,
+            lat: 21.738836,
+            long: -97.933290,
             spell: "some spell"
         }
     },
@@ -20,6 +20,33 @@ const api = {
             success: true,
             ...data
         };
+    },
+    // assume units is in miles (DEFAULT), otherwise units can be "K" (kilometers) or "N" (nautical miles)
+    // https://www.geodatasource.com/developers/javascript
+    calculateDistance: (lat1, long1, lat2, long2, unit) => {
+        if ((lat1 == lat2) && (long1 == long2)) {
+            return 0;
+        } else {
+            let radlat1 = Math.PI * (lat1 / 180);
+            let radlat2 = Math.PI * (lat2 / 180);
+            let theta = (long1 - long2);
+            let radtheta = Math.PI * (theta / 180);
+
+            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1)
+                dist = 1;
+            
+            dist = Math.acos(dist);
+            dist *= (180 / Math.PI);
+            dist *= (60 * 1.1515);
+
+            if (unit === "K")
+                dist *= 1.609344;
+            else if (unit === "N")
+                dist *= 0.8684;
+            
+            return dist;
+        }
     },
     loginUser: async (username) => {
         let ref = db.ref(`users/${username}`);

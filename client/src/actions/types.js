@@ -1,1 +1,3 @@
 export const LOGIN_USER = 'LOGIN_USER';
+
+export const SET_PLAYER_COORDS = 'SET_PLAYER_COORDS';

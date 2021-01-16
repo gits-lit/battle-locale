@@ -18,14 +18,14 @@ const MapComponent = (props) => {
         position: 'absolute',
         right: '0'
       }}
-      center={[-118.2437, 34.0522]}
+      center={[-117.2340, 32.8801]}
       flyToOptions={{
         speed: 0
       }}
       onClick={props.mapClick}
       onStyleLoad={props.mapLoad}
       pitch = {[60]}
-      style="mapbox://styles/mapbox/light-v10"
+      style="mapbox://styles/mapbox/streets-v11"
       zoom = {[15]}
     >
     </Map>

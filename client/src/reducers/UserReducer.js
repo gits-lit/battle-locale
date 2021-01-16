@@ -1,7 +1,9 @@
-import { LOGIN_USER } from '../actions/types';
+import { LOGIN_USER, SET_PLAYER_COORDS } from '../actions/types';
 
 const initialState = {
   name: '',
+  lat: '',
+  long: '',
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -11,6 +13,12 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         name: action.payload.name,
       };
+    case SET_PLAYER_COORDS:
+      return {
+        ...state,
+        lat: action.payload.lat,
+        long: action.payload.long
+      }
     default:
       return state;
   }
