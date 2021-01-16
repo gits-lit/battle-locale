@@ -1,0 +1,11 @@
+@import '~antd/dist/antd.css';
+
+@font-face {
+  font-family: 'Supercell';
+  src: local('Supercell'), url(./assets/supercell-magic-webfont.ttf) format('truetype');
+}
+
+body {
+  margin: 0;
+  font-family: 'Supercell';
+}
