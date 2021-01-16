@@ -1,5 +1,5 @@
 const router = require('express')();
-const f = require('../util/funcs');
+const f = require('../util/system');
 
 router.get('/', async (req, res) => res.json(await f.getUsers()));
 

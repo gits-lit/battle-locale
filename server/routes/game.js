@@ -1,6 +1,5 @@
 const router = require('express')();
-const f = require('../util/funcs');
-const { render } = require('./users');
+const f = require('../util/system');
 
 router.post('/subtractHealth/', async (req, res) => {
     let username = req.body.name;
