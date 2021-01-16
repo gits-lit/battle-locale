@@ -139,6 +139,21 @@ router.post('/setPlayerCoords/', async (req, res) => {
     }
 });
 
+router.get('/getAllSpellTomes/', async (req, res) => {
+    // omit the "spell field" for the front-end
+    let tomes = [];
+    for (let [tomeId, tomeData] of Object.entries(db.spellTomes))
+        tomes.push({
+            id: tomeId,
+            lat: tomeData.lat,
+            long: tomeData.long
+        });
+    
+    res.json(db.createSuccess({
+        spellTomes: tomes
+    }));
+});
+
 router.get('/getCircleInfo/', async (req, res) => {
     let gameData = await db.getGameStats();
 
