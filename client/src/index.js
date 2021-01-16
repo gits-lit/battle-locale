@@ -11,7 +11,6 @@ import configureStore, { history } from './store';
 //import isGamingGoing from './containers/isGameGoing';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
-import OnboardingPage from './containers/OnboardingPage';
 import QueuePage from './containers/QueuePage';
 
 const store = configureStore();
@@ -22,7 +21,6 @@ ReactDOM.render(
       <>
         <Switch>
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/onboarding" component={OnboardingPage} />
           <Route exact path="/queue" component={QueuePage} />
           <Route path="/" component={HomePage} />
         </Switch>
