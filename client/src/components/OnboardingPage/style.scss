@@ -1,5 +1,34 @@
 .onboarding-page {
-  h1 {
-    color: yellow;
+  .onboarding-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+
+      img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    bottom: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 }
