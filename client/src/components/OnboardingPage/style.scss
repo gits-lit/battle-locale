@@ -1,15 +1,14 @@
 .onboarding-page {
-  position: absolute;
-  z-index: 5000;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-
   .onboarding-container {
     width: 100vw;
     height: 100vh;
     background-color: white;
+    position: absolute;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
 
     .slide {
       width: 100vw;
