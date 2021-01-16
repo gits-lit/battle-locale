@@ -106,11 +106,11 @@ router.post('/setPlayerCoords/', async (req, res) => {
         let data = await f.getUser(username);
         if (data.success) {
             if (lat && lat.length > 0) {
-                lat = parseInt(lat);
+                lat = parseFloat(lat);
 
                 if (!isNaN(lat)) {
                     if (long && long.length > 0) {
-                        long = parseInt(long);
+                        long = parseFloat(long);
 
                         if (!isNaN(long)) {
                             res.json(await f.updateUser(username, {
