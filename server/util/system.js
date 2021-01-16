@@ -1,6 +1,6 @@
 const db = require('./firebase_db');
 const api = {
-    spells: ["some spell"],
+    spells: ["arcane-shot", "fireball", "ice-bolt", "heal"],
     spellTomes: {
         "id": {
             lat: 21.738836,
