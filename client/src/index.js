@@ -10,8 +10,8 @@ import configureStore, { history } from './store';
 // Create a container to check the game status to see if the user should be routed to the HomePage or LoginPage
 //import isGamingGoing from './containers/isGameGoing';
 import HomePage from './containers/HomePage';
-import LoadingPage from './containers/LoadingPage';
 import LoginPage from './containers/LoginPage';
+import OnboardingPage from './containers/OnboardingPage';
 import QueuePage from './containers/QueuePage';
 
 const store = configureStore();
@@ -22,8 +22,8 @@ ReactDOM.render(
       <>
         <Switch>
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/onboarding" component={OnboardingPage} />
           <Route exact path="/queue" component={QueuePage} />
-          <Route exact path="/loading" component={LoadingPage} />
           <Route path="/" component={HomePage} />
         </Switch>
       </>
