@@ -1,5 +1,5 @@
 const router = require('express')();
-const f = require('../util/system');
+const { messaging } = require('../util/firebase');
 
 router.post('/subscribe/', async (req, res) => {
 
