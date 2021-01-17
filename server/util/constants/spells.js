@@ -1,0 +1,1 @@
+module.exports = ["arcane-shot", "fireball", "ice-bolt", "heal"];
