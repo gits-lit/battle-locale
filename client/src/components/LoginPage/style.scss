@@ -1,5 +1,28 @@
 .login-page {
-  h1 {
-    color: green;
+  background-image: url(../../assets/background.png);
+  height: 812px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .username-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 350px;
+
+    label {
+      color: white;
+      font-size: 1.2em;
+      text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
+    }
+
+    #username {
+      margin-bottom: 50px;
+    }
+
+    .play-button {
+      height: 75px;
+    }
   }
 }

@@ -4,24 +4,26 @@ import { UserOutlined } from '@ant-design/icons';
 import './style.scss';
 
 const QueuePage= () => {
+  let players = [];
+  for (let i = 0; i < 10; i++) {
+    players.push(i);
+  }
+
   const checkPlayers = () => {
-    let value = 3 + 3;
+    let value = 3 + 6;
     // let numPlayers = API.getUsers().length;
+    const currPlayers = players.map((player) => {
+      if (player < value) {
+        return <UserOutlined className="player-active" />
+      } else {
+        return <UserOutlined className="player-inactive" />
+      }
+    });
+
     return (
       <div className="live-queue">
-        <div className="player-row-one">
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-        </div>
-        <div className="player-row-two">
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
+        <div className="player-row">
+          {currPlayers}
         </div>
         <p className="players-found-text"><span>{value}</span> out of 10 players found</p>
       </div>
@@ -30,24 +32,9 @@ const QueuePage= () => {
 
   return (
     <div className="queue-page">
-      <h1>Queue Page</h1>
       <div className="queue">
         <p className="queue-text">in queue...</p>
-        <div className="player-row-one">
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-        </div>
-        <div className="player-row-two">
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-          <UserOutlined />
-        </div>
-        <p className="players-found-text">{checkPlayers()} out of 10 players found</p>
+        {checkPlayers()}
       </div>
       <div className="exit-link">
         <a className="exit-queue" href="/login">exit queue</a>
