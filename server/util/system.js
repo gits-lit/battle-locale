@@ -64,7 +64,7 @@ const api = {
                     lat: 0,
                     long: 0,
                     mana: 0,
-                    spells: []
+                    spells: ["arcane-shot"]
                 });
                 
                 // send notification to all clients so they can update game lobby
