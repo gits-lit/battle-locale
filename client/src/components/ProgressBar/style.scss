@@ -1,7 +1,9 @@
 .ProgressBar {
+  z-index: 8000;
+  position: absolute;
   .progress-container {
     position: absolute;
-    z-index: 99;
+    z-index: 5000;
     background-image: url('../../assets/rectbg.svg');
     background-size: cover;
     height: 100vh;

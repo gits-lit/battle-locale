@@ -6,7 +6,7 @@ import finishButton from '../../assets/Finish.png';
 import './style.scss';
 
 const ProgressBar = (props) => {
-  const [showProgress, setShowProgress] = useState(false);
+  const [showProgress, setShowProgress] = useState(true);
   const [progressDone, setProgressDone] = useState(false);
   const [progress, setProgress] = useState(0);
   const [progressTick, setProgessTick] = useState(true);
@@ -16,13 +16,19 @@ const ProgressBar = (props) => {
     if (progressTick) {
       interval = setInterval(() => {
         setProgress(progress => progress + 10);
+        if(progress === 100) {
+          props.disableLearning();
+        }
       }, 1000);
     } else if (progressTick && progress === 100) {
+      props.disableLearning();
       setProgessTick(false);
       setProgressDone(true);
       clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    }
   }, [progressTick, progress]);
 
   const finishProgress = () => {
@@ -30,6 +36,7 @@ const ProgressBar = (props) => {
     setProgessTick(false);
     setProgressDone(false);
     setProgress(0);
+    props.disableLearning();
   };
 
   const renderProgress = () => {

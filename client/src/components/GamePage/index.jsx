@@ -1,15 +1,13 @@
 import React from 'react';
 
-import Navbar from '../Navbar';
 import Footer from '../Footer';
 
 import './style.scss';
 
-const GamePage = () => {
+const GamePage = (props) => {
   return (
     <div className="game-page">
-      <Navbar notif={'Meowlord has been slain by Snu'} />
-      <Footer />
+      <Footer enableAttack={props.enableAttack} enableLearning={props.enableLearning}/>
     </div>
   );
 };

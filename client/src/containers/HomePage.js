@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import OnboardingPage from '../components/OnboardingPage';
 import GamePage from '../components/GamePage';
+import AttackPage from '../components/AttackPage';
+import NavBar from '../components/Navbar';
+import ProgressBar from '../components/ProgressBar';
 import Map from '../components/Map';
 import { connect } from 'react-redux';
 import {pines, daisies, birches} from '../assets/constants.js';
@@ -19,6 +22,24 @@ let lng1 = '';
 
 const HomePageContainer = (props) => {
   const [flyTo, setFlyTo] = useState(true);
+  const [attack, setAttack] = useState(false);
+  const [learning, setLearning] = useState(false);
+
+  const enableAttack = () => {
+    setAttack(true);
+  }
+
+  const disableAttack = () => {
+    setAttack(false);
+  }
+
+  const enableLearning = () => {
+    setLearning(true);
+  }
+
+  const disableLearning = () => {
+    setLearning(false);
+  }
 
   // HANDLE DEVICE LOCATION AND PLAYER COORDINATES
   useEffect(() => {
@@ -78,10 +99,20 @@ const HomePageContainer = (props) => {
     props.fireSpell(map, lat1, lng1, lat2.toString(), lng2.toString());
   }
 
+  let hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning}/>
+  if (attack) {
+    hud = <AttackPage disableAttack={disableAttack} />;
+  } else if (learning) {
+    hud = <ProgressBar disableLearning={disableLearning}/>;
+  } else {
+    hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning}/>
+  }
+
   return (
     <>
       <OnboardingPage startLocation={startLocation}/>
-      <GamePage />
+      <NavBar />
+      {hud}
       <Map mapClick={mapClick} mapLoad={mapLoad} />
     </>
   );

@@ -11,8 +11,8 @@ const Footer = (props) => {
     <div className="footer">
       <div className="footer-container">
         <div className="button-row">
-          <img src={Learn} alt="learn" className="a-button" />
-          <img src={Attack} alt="attack" className="a-button" />
+          <img onClick={props.enableLearning} src={Learn} alt="learn" className="a-button" />
+          <img onClick={props.enableAttack} src={Attack} alt="attack" className="a-button" />
         </div>
         <Weapons />
       </div>

@@ -11,11 +11,10 @@ const Map = ReactMapboxGl({
 const MapComponent = (props) => {
   return (
     <div className="map">
-      <Navbar />
       <Map
         antialias={true}
         containerStyle={{
-          height: '110vh',
+          height: '100vh',
           width: '100vw',
           position: 'absolute',
           right: '0'
