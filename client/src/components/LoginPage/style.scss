@@ -1,5 +1,6 @@
 .login-page {
   background-image: url(../../assets/background.png);
+  background-size: cover;
   height: 812px;
   display: flex;
   justify-content: center;
@@ -17,8 +18,26 @@
       text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
     }
 
-    input {
-      color: black;
+    .name-input {
+      margin-top: 20px;
+      color: white;
+      border-radius: 8px;
+      height: 40px;
+      border: none;
+      background: rgba(10, 10, 123, .25);
+      padding: 0 8px;
+    }
+
+    .play-button:hover {
+      transform: scale(1.05);
+    }
+
+    input:focus, input.form-control:focus {
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
     }
 
     #username {
@@ -26,6 +45,7 @@
     }
 
     .play-button {
+      transition: transform .2s; /* Animation */
       height: 75px;
     }
   }
