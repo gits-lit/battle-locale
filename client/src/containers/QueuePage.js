@@ -15,8 +15,8 @@ const QueuePageContainer = (props) => {
       setStart(true);
       setTimeout(function(){
         props.redirectHome();
-      }, 10000);
-    }, 3000);
+      }, 3000);
+    }, 10000);
   }, []);
 
   return (

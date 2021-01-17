@@ -20,7 +20,7 @@ const MapComponent = (props) => {
       }}
       center={[-117.2201226, 32.860568]}
       flyToOptions={{
-        speed: 0
+        speed: 5
       }}
       onClick={props.mapClick}
       onStyleLoad={props.mapLoad}

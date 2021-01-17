@@ -126,6 +126,27 @@ const customLayer = {
   }
 }
 
+export const loadTomes = (map) => async dispatch => {
+  console.log('loadTomes')
+  const response = await fetch('https://battle-locale.herokuapp.com/api/game/getAllSpellTomes', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+
+    const data = await response.json();
+    console.log(data);
+    if (!data) throw new Error('Empty response from server');
+    if (data.error) throw new Error(data.error.message);
+    for (let i = 0; i < data.spellTomes.length; i++) {
+      const tome = data.spellTomes[i];
+      addTome(map, tome.lat, tome.long);
+    }
+
+}
+
 export const loadTrees = (map, pines, birches, daisies) => {
   console.log('load');
   for (let i = 0; i < pines.length; i++) {
@@ -515,6 +536,142 @@ this.scene.add(directionalLight2);
     console.log('error')
   }
 }
+
+const addTome = (map, lat, lng) => {
+  // parameters to ensure the model is georeferenced correctly on the map
+  const modelOrigin = [lng, lat];
+  const modelAltitude = 0;
+  const modelRotate = [Math.PI / 2, - Math.PI / 4 + 0.1, 0];
+
+  const modelAsMercatorCoordinate = MercatorCoordinate.fromLngLat(
+    modelOrigin,
+    modelAltitude
+  );
+
+  const modelTransform = {
+    translateX: modelAsMercatorCoordinate.x,
+    translateY: modelAsMercatorCoordinate.y,
+    translateZ: modelAsMercatorCoordinate.z,
+    rotateX: modelRotate[0],
+    rotateY: modelRotate[1],
+    rotateZ: modelRotate[2],
+    /* Since our 3D model is in real world meters, a scale transform needs to be
+    * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+    */
+    scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits() * 15
+  };
+
+  // Insert the layer beneath any symbol layer.
+  const layers = map.getStyle().layers;
+
+  let labelLayerId;
+  for (let i = 0; i < layers.length; i++) {
+    if (layers[i].type === 'custom') {
+    labelLayerId = layers[i].id;
+    break;
+    }
+  }
+
+  // configuration of the custom layer for a 3D model per the CustomLayerInterface
+  const customLayer = {
+  id: 'tree' + lng.toString() + lat.toString(),
+  type: 'custom',
+  renderingMode: '3d',
+  onAdd: function (map, gl) {
+  this.camera = new THREE.Camera();
+  this.scene = new THREE.Scene();
+
+  // create two three.js lights to illuminate the model
+var directionalLight = new THREE.DirectionalLight(0xc0c0c0);
+directionalLight.position.set(0, -70, 100).normalize();
+this.scene.add(directionalLight);
+ 
+var directionalLight2 = new THREE.DirectionalLight(0xc0c0c0);
+directionalLight2.position.set(0, 70, 100).normalize();
+this.scene.add(directionalLight2);
+  // use the three.js GLTF loader to add the player model to the three.js scene
+  var loader = new GLTFLoader();
+  loader.load(
+  './crystal_staff/scene.gltf',
+  function (gltf) {
+  gltf.scene.rotation.y = Math.random() * 2 * Math.PI;
+  this.scene.add(gltf.scene);
+  this.obj = gltf.scene;
+  }.bind(this)
+  );
+  this.map = map;
+  
+  // use the Mapbox GL JS map canvas for three.js
+  this.renderer = new THREE.WebGLRenderer({
+  canvas: map.getCanvas(),
+  context: gl,
+  antialias: true
+  });
+  
+  this.renderer.autoClear = false;
+  this.renderer.gammaOutput = true;
+  this.renderer.gammaFactor = 22;
+  },
+  render: function (gl, matrix) {
+  var rotationX = new THREE.Matrix4().makeRotationAxis(
+  new THREE.Vector3(1, 0, 0),
+  modelTransform.rotateX
+  );
+  var rotationY = new THREE.Matrix4().makeRotationAxis(
+  new THREE.Vector3(0, 1, 0),
+  modelTransform.rotateY
+  );
+  var rotationZ = new THREE.Matrix4().makeRotationAxis(
+  new THREE.Vector3(0, 0, 1),
+  modelTransform.rotateZ
+  );
+  
+  var m = new THREE.Matrix4().fromArray(matrix);
+  var l = new THREE.Matrix4()
+  .makeTranslation(
+  modelTransform.translateX,
+  modelTransform.translateY,
+  modelTransform.translateZ
+  )
+  .scale(
+  new THREE.Vector3(
+  modelTransform.scale,
+  -modelTransform.scale,
+  modelTransform.scale
+  )
+  )
+  .multiply(rotationX)
+  .multiply(rotationY)
+  .multiply(rotationZ);
+  
+  this.camera.projectionMatrix = m.multiply(l);
+  this.renderer.state.reset();
+  this.renderer.render(this.scene, this.camera);
+  this.map.triggerRepaint();
+  const animate = () => {
+      requestAnimationFrame(animate);
+      if(this.obj && this.obj.rotation && this.obj.rotation.y) {
+        this.obj.rotation.y += 0.001;
+      }
+
+      this.renderer.render(this.scene, this.camera);
+  }
+  animate();
+
+  }
+  };
+  
+  try {
+    
+    map.addLayer(customLayer, labelLayerId);
+    treeLayers.push(customLayer.id);
+    window.map = map;
+  }
+  catch (error) {
+    console.log('error')
+  }
+}
+
 
 const clearMap = () => {
   const map = window.map;
