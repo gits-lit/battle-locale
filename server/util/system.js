@@ -60,7 +60,7 @@ const api = {
             try {
                 await ref.set({
                     name: username,
-                    health: 0,
+                    health: 100,
                     lat: 0,
                     long: 0,
                     mana: 0,
