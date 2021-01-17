@@ -1,4 +1,4 @@
-const db = require('./firebase_db');
+const { database: db } = require('./firebase');
 const api = {
     spells: ["arcane-shot", "fireball", "ice-bolt", "heal"],
     spellTomes: {
