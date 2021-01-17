@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPage from '../components/OnboardingPage';
+import LoginPage from '../components/LoginPage';
 
 const LoginPageContainer = (props) => {
   return (
