@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OnboardingPage from '../components/OnboardingPage';
+import GamePage from '../components/GamePage';
 import Map from '../components/Map';
 import { connect } from 'react-redux';
 import {pines, daisies, birches} from '../assets/constants.js';
@@ -80,6 +81,7 @@ const HomePageContainer = (props) => {
   return (
     <>
       <OnboardingPage startLocation={startLocation}/>
+      <GamePage />
       <Map mapClick={mapClick} mapLoad={mapLoad} />
     </>
   );
