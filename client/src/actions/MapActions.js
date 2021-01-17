@@ -60,7 +60,7 @@ const customLayer = {
   function (gltf) {
   this.scene.add(gltf.scene);
   }.bind(this)
-  );
+  ); 
   this.map = map;
    
   // use the Mapbox GL JS map canvas for three.js
@@ -662,7 +662,6 @@ this.scene.add(directionalLight2);
   };
   
   try {
-    
     map.addLayer(customLayer, labelLayerId);
     treeLayers.push(customLayer.id);
     window.map = map;

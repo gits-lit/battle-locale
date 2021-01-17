@@ -9,9 +9,8 @@ import {
   loadTrees,
   loadTomes,
 } from '../actions/MapActions';
-
+import { getClosestSpellTome, getClosestUser } from '../actions/ClosestActions';
 import { setPlayerCoords } from '../actions/UserActions';
-let name='';
 
 
 const HomePageContainer = (props) => {
@@ -45,7 +44,8 @@ const HomePageContainer = (props) => {
   const successGetPosition = (position) => {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
-    props.setPlayerCoords('name', latitude, longitude);
+    props.setPlayerCoords(props.name, latitude, longitude);
+    props.getClosestSpellTome(props.name);
     setPlayerLocation(window.map, latitude, longitude);
   }
   
@@ -72,7 +72,6 @@ const HomePageContainer = (props) => {
 };
 
 const mapStateToProps = state => {
-  name = state.user.name;
   return {
     name: state.user.name,
     lat: state.user.lat,
@@ -82,5 +81,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { loadTomes, loadTrees , setPlayerCoords, setPlayerLocation }
+  { getClosestSpellTome, loadTomes, loadTrees , setPlayerCoords, setPlayerLocation }
 )(HomePageContainer);
