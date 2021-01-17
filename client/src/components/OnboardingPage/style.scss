@@ -4,6 +4,7 @@
     height: 100vh;
     position: absolute;
     background-image: url(../../assets/background_onboarding.png);
+    background-size: cover;
     z-index: 5000;
     left: 0;
     top: 0;
@@ -13,17 +14,16 @@
     .slide {
       width: 100vw;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
 
       .tip {
-        margin-top: 27vh;
+        position: absolute;
+        top: 62vh;
+        left: 10vw;
         text-align: center;
         width: 80vw;
 
         .tip-title {
-          font-size: 1.7em;
+          font-size: 3vh;
           line-height: 0;
           color: white;
           text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
@@ -32,29 +32,26 @@
         .tip-text {
           color: white;
           font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-          font-size: 21px;
+          font-size: 4vw;
+          margin-bottom: 0.5vh;
         }
 
         .tip-icon {
           color: #FF56FF;
-          font-size: 2.5em;
-          margin-top: 3vh;
+          font-size: 5vh;
+          margin-top: 0.5vh;
         }
-      }
-
-      #tip1 {
-        margin-top: 20vh;
       }
     }
   }
 
   .play-button {
-    height: 75px;
+    height: 9vh;
   }
 
   input {
     position: absolute;
-    bottom: 12vh;
+    bottom: 8vh;
     margin-left: auto;
     margin-right: auto;
     left: 0;

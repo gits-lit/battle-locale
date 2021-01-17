@@ -1,32 +1,38 @@
 .login-page {
   background-image: url(../../assets/background.png);
-  height: 812px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-size: cover;
+  height: 100vh;
 
   .username-form {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin-top: 350px;
+    width: 50vw;
+    position: absolute;
+    top: 62vh;
+    left: 25vw;
 
     label {
       color: white;
-      font-size: 1.2em;
+      font-size: 3vh;
       text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
-    }
-
-    input {
-      color: black;
+      margin-bottom: 1vh;
     }
 
     #username {
-      margin-bottom: 50px;
+      margin-bottom: 7vh;
+      color: white;
+      background-color: rgba(10, 10, 128, 0.25);
+      border-radius: 15%;
+      border: none;
+      height: 4vh;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     .play-button {
-      height: 75px;
+      height: 9vh;
     }
   }
 }
