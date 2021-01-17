@@ -152,6 +152,8 @@ router.get('/getAllSpellTomes/', async (req, res) => {
     }));
 });
 
+router.get('/getGameStats/', async (req, res) => res.json(await f.getGameStats()));
+
 router.get('/getCircleInfo/', async (req, res) => {
     let gameData = await f.getGameStats();
 

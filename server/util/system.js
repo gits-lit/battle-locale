@@ -1,13 +1,7 @@
-const db = require('./firebase_db');
+const { database: db, messaging: msg } = require('./firebase');
 const api = {
-    spells: ["some spell"],
-    spellTomes: {
-        "id": {
-            lat: 21.738836,
-            long: -97.933290,
-            spell: "some spell"
-        }
-    },
+    spells: require('./constants/spells'),
+    spellTomes: require('./constants/spelltomes'),
     createError: (message, data) => {
         return {
             success: false,
@@ -20,6 +14,10 @@ const api = {
             success: true,
             ...data
         };
+    },
+    // [min, max)
+    randomNumber: (min, max) => {
+        return Math.random() * (max - min) + min;
     },
     // assume units is in miles (DEFAULT), otherwise units can be "K" (kilometers) or "N" (nautical miles)
     // https://www.geodatasource.com/developers/javascript
@@ -52,6 +50,11 @@ const api = {
         let ref = db.ref(`users/${username}`);
         let result = await ref.once('value');
         if (result.exists()) {
+            // send notification to all clients so they can update game lobby
+            await api.sendNotification({
+                event: 'UPDATE'
+            });
+
             return api.createSuccess();
         } else {
             try {
@@ -62,6 +65,11 @@ const api = {
                     long: 0,
                     mana: 0,
                     spells: []
+                });
+                
+                // send notification to all clients so they can update game lobby
+                await api.sendNotification({
+                    event: 'UPDATE'
                 });
 
                 return api.createSuccess();
@@ -99,6 +107,16 @@ const api = {
             });
         }
     },
+    sendNotification: (data) => {
+        return msg.send({
+            topic: 'game',
+            notification: {
+                title: 'Game Update',
+                body: 'UPDATE'
+            },
+            data
+        });
+    },
     updateUser: async (username, newData) => {
         // verify the user exists
         let data = await api.getUser(username);
@@ -107,6 +125,12 @@ const api = {
         let ref = db.ref(`users/${username}`);
         try {
             await ref.update(newData);
+            
+            // send notification to all clients so they can update game lobby
+            await api.sendNotification({
+                event: 'UPDATE'
+            });
+
             return api.createSuccess();
         } catch (e) {
             return api.createError(`Error when updating user "${username}" data: ${e.message}`);
@@ -135,6 +159,15 @@ const api = {
                         long: 0
                     }
                 });
+
+                // assign each spell tome a random spell
+                for (let [tomeId, tomeData] of Object.entries(api.spellTomes))
+                    tomeData.spell = api.spells[api.randomNumber(0, api.spells.length)];
+
+                // send notification to all clients so they can update game lobby
+                await api.sendNotification({
+                    event: 'UPDATE'
+                });
                 
                 return api.createSuccess();
             } catch (e) {
@@ -153,11 +186,12 @@ const api = {
             }
 
             let data = result.val();
-            data.timeStamp = Date.now();
+            /*data.timeStamp = Date.now();
 
             await ref.update({
                 timeStamp: Date.now()
-            });
+            });*/
+            data.amountOfSecondsPassed = (Date.now() - data.timeStamp) / 1000;
 
             return api.createSuccess({
                 stats: data

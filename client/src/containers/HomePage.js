@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OnboardingPage from '../components/OnboardingPage';
-import GameMap from './GameMap';
+import Map from '../components/Map';
 import { connect } from 'react-redux';
+import {pines, daisies, birches} from '../assets/constants.js';
+
+import {
+  setPlayerLocation,
+  loadTrees,
+} from '../actions/MapActions';
 
 import { setPlayerCoords } from '../actions/UserActions';
 let name='';
 
 const HomePageContainer = (props) => {
   // HANDLE DEVICE LOCATION AND PLAYER COORDINATES
+  useEffect(() => {
+    const gameLoop = () => {
+      console.log('Updating');
+    }
 
+    console.log('useEffect');
+    setInterval(gameLoop, 30000);
+  }, []);
+
+  const setPlayerLocation = (map, lat, lng) => {
+    props.setPlayerLocation(map, lat, lng);
+  }
+
+  // HANDLE LOCATION
   const successGetPosition = (position) => {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
     props.setPlayerCoords('name', latitude, longitude);
+    setPlayerLocation(window.map, latitude, longitude);
   }
   
   const errorGetPosition = () => {
@@ -23,10 +43,15 @@ const HomePageContainer = (props) => {
     navigator.geolocation.watchPosition(successGetPosition, errorGetPosition);
   }
 
+  const mapLoad = map => {
+    window.map = map;
+    loadTrees(map, pines, birches, daisies);
+  };
+
   return (
     <>
       <OnboardingPage startLocation={startLocation}/>
-      <GameMap />
+      <Map mapLoad={mapLoad} />
     </>
   );
 };
@@ -40,5 +65,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setPlayerCoords }
+  { loadTrees , setPlayerCoords, setPlayerLocation }
 )(HomePageContainer);
