@@ -153,11 +153,12 @@ const api = {
             }
 
             let data = result.val();
-            data.timeStamp = Date.now();
+            /*data.timeStamp = Date.now();
 
             await ref.update({
                 timeStamp: Date.now()
-            });
+            });*/
+            data.amountOfSecondsPassed = (Date.now() - data.timeStamp) / 1000;
 
             return api.createSuccess({
                 stats: data
