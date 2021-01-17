@@ -4,5 +4,18 @@
     display: flex;
     justify-content: space-between;
   }
+
+
   
+}
+
+.weapon-slot {
+  position: relative;
+
+  .weapon {
+    position: absolute;
+    height: 40px;
+    top: 10%;
+    left: 22.5%;
+  }
 }
