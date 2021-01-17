@@ -29,7 +29,7 @@ ReactDOM.render(
           <Route exact path="/game" component={GamePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/queue" component={requireAuth(QueuePage)} />
-          <Route path="/" component={HomePage} />
+          <Route path="/" component={requireAuth(HomePage)} />
         </Switch>
       </>
     </ConnectedRouter>
