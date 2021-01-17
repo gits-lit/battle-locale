@@ -1,0 +1,30 @@
+.AttackPage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .weapon-selector {
+    width: 95.5%;
+    position: absolute;
+    top: 22.5%;
+    z-index: 100;
+  }
+
+  .select-text {
+    -webkit-text-stroke: #ffa007 1.5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    .cancel {
+      position: absolute;
+      bottom: 2%;
+    }
+  }
+}
