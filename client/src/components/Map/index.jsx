@@ -4,6 +4,7 @@ import React from 'react';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import ProgressBar from '../ProgressBar';
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -14,7 +15,7 @@ const MapComponent = (props) => {
   return (
     <div className="map">
       <Navbar />
-      <Footer />
+      <ProgressBar name="Meowmere" img="../../assets/Attack.png" stats="10att 20sec cooldown" />
       <Map
         antialias={true}
         containerStyle={{

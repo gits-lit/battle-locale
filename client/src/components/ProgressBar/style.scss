@@ -1,0 +1,64 @@
+.ProgressBar {
+  .progress-container {
+    position: absolute;
+    z-index: 99;
+    background-image: url('../../assets/rectbg.svg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+
+    .progress-info {
+      position: absolute;
+      top: 30vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 15vw;
+
+      .learn-text {
+        font-size: 3vh;
+        line-height: 5vh;
+        color: white;
+        text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
+        text-align: center;
+        width: 70vw;
+      }
+
+      .progress-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3vh;
+
+        span {
+          color: #FFBE2C;
+          margin-right: 35vw;
+        }
+      }
+
+      .weapon-img {
+        margin-bottom: 3vh;
+      }
+
+      .progress-confirm {
+        margin-top: 3vh;
+
+        .progress-button {
+          margin-bottom: 1vh;
+        }
+      }
+    }
+
+    /*
+
+
+    .progress-bar {
+      position: absolute;
+      top: 50vh;
+    }
+
+    .progress-text {
+      top: 50vh;
+    }*/
+  }
+}
