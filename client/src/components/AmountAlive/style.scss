@@ -1,0 +1,31 @@
+.AmountAlive {
+  margin-top: 20px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .alive-text {
+    width: 42%;
+    padding-left: 30px;
+    -webkit-text-stroke: #ffa007 1px;
+  }
+
+  .person-container {
+    padding-right: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 42%;
+    .person-a {
+      margin: 2px 5px;
+      width: 1px;
+      flex: 1 0 12%;
+    }
+    .person-ua {
+      margin: 2px 5px;
+      width: 1px;
+      flex: 1 0 12%;
+    }
+  }
+}
