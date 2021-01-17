@@ -11,10 +11,10 @@ const AmountAlive = (props) => {
       <h3 className="alive-text">{props.alive} players remain</h3>
       <div className="person-container">
         {[...Array(props.alive)].map((e, i) => (
-          <img class="person-a" src={Person} alt="person" />
+          <img className="person-a" src={Person} alt="person" />
         ))}
         {[...Array(10 - props.alive)].map((e, i) => (
-          <img class="person-ua" src={Personua} alt="person" />
+          <img className="person-ua" src={Personua} alt="person" />
         ))}
       </div>
     </div>
