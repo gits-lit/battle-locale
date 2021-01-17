@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import './index.scss';
+
+import './style.scss';
 
 import configureStore, { history } from './store';
 
@@ -13,6 +14,7 @@ import configureStore, { history } from './store';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import QueuePage from './containers/QueuePage';
+import GamePage from './components/GamePage';
 
 const store = configureStore();
 
@@ -21,6 +23,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <>
         <Switch>
+          <Route exact path="/game" component={GamePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/queue" component={QueuePage} />
           <Route path="/" component={HomePage} />

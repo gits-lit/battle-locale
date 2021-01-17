@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Flickity from 'react-flickity-component';
+import { EnvironmentFilled, HomeFilled } from '@ant-design/icons';
+import playButton from '../../assets/play_button.png';
 
 import './style.scss';
 import "./flickity.css";
@@ -29,14 +31,25 @@ const OnboardingPage= (props) => {
             static // default false
           >
             <div className="slide">
-              <img src={onboarding1}/>
+              <div className="tip" id="tip1">
+                <p className="tip-title">tip one</p>
+                <p className="tip-text">Move to the center to avoid taking damage!</p>
+              </div>
             </div>
             <div className="slide">
-              <img src={onboarding2}/>
+              <div className="tip">
+                <p className="tip-title">tip two</p>
+                <p className="tip-text">Go to landmarks to get weapons to damage friends!</p>
+                <EnvironmentFilled className="tip-icon" />
+              </div>
             </div>
             <div className="slide">
-              <button onClick={handlePlay}>Play</button>
-              <img src={onboarding3}/>
+              <div className="tip">
+                <p className="tip-title">tip three</p>
+                <p className="tip-text">Have fun, but do not enter private property!</p>
+                <HomeFilled className="tip-icon" />
+              </div>
+              <input type="image" className="play-button" alt="PLAY" src={playButton} onClick={handlePlay}></input>
             </div>
           </Flickity>
         </div>

@@ -2,8 +2,8 @@
   .onboarding-container {
     width: 100vw;
     height: 100vh;
-    background-color: white;
     position: absolute;
+    background-image: url(../../assets/background_onboarding.png);
     z-index: 5000;
     left: 0;
     top: 0;
@@ -13,18 +13,48 @@
     .slide {
       width: 100vw;
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      img {
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover
+      .tip {
+        margin-top: 27vh;
+        text-align: center;
+        width: 80vw;
+
+        .tip-title {
+          font-size: 1.7em;
+          line-height: 0;
+          color: white;
+          text-shadow: -3px 3px #BC7408, 2px -2px #BC7408, 2px 2px #BC7408, -2px -2px #BC7408;
+        }
+
+        .tip-text {
+          color: white;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-size: 21px;
+        }
+
+        .tip-icon {
+          color: #FF56FF;
+          font-size: 2.5em;
+          margin-top: 3vh;
+        }
+      }
+
+      #tip1 {
+        margin-top: 20vh;
       }
     }
   }
 
-  button {
+  .play-button {
+    height: 75px;
+  }
+
+  input {
     position: absolute;
-    bottom: 15vh;
+    bottom: 12vh;
     margin-left: auto;
     margin-right: auto;
     left: 0;
