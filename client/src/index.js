@@ -11,6 +11,8 @@ import configureStore, { history } from './store';
 // Pages
 // Create a container to check the game status to see if the user should be routed to the HomePage or LoginPage
 //import isGamingGoing from './containers/isGameGoing';
+import LosePage from './components/LosePage';
+import WinPage from './components/WinPage';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import QueuePage from './containers/QueuePage';
@@ -25,7 +27,9 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <>
         <Switch>
-        <Route exact path="/attack" component={AttackPage} />
+        <Route exact path="/Lose" component={LosePage} />
+          <Route exact path="/win" component={WinPage} />
+          <Route exact path="/attack" component={AttackPage} />
           <Route exact path="/game" component={GamePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/queue" component={requireAuth(QueuePage)} />
