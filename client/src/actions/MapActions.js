@@ -671,6 +671,12 @@ this.scene.add(directionalLight2);
   }
 }
 
+export const fireSpell = (map, lat, lng, targetLat, targetLng) => async dispatch => {
+  console.log(lat);
+  console.log(lng);
+  console.log(targetLat);
+  console.log(targetLng)
+}
 
 const clearMap = () => {
   const map = window.map;

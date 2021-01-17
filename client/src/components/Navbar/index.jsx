@@ -17,7 +17,7 @@ const Navbar = (props) => {
               💖
             </span>
           </h3>
-          <h3>3m 21s</h3>
+          <h3>3m 31s</h3>
           <h4 className="alive">alive</h4>
         </div>
       </div>
