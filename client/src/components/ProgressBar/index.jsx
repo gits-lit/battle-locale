@@ -6,7 +6,7 @@ import finishButton from '../../assets/Finish.png';
 import './style.scss';
 
 const ProgressBar = (props) => {
-  const [showProgress, setShowProgress] = useState(true);
+  const [showProgress, setShowProgress] = useState(false);
   const [progressDone, setProgressDone] = useState(false);
   const [progress, setProgress] = useState(0);
   const [progressTick, setProgessTick] = useState(true);

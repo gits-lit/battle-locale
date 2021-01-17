@@ -10,25 +10,28 @@ const Map = ReactMapboxGl({
 
 const MapComponent = (props) => {
   return (
-    <Map
-      antialias={true}
-      containerStyle={{
-        height: '110vh',
-        width: '100vw',
-        position: 'absolute',
-        right: '0'
-      }}
-      center={[-117.2201226, 32.860568]}
-      flyToOptions={{
-        speed: 5
-      }}
-      onClick={props.mapClick}
-      onStyleLoad={props.mapLoad}
-      pitch = {[60]}
-      style="mapbox://styles/mapbox/streets-v11"
-      zoom = {[15]}
-    >
-    </Map>
+    <div className="map">
+      <Navbar />
+      <Map
+        antialias={true}
+        containerStyle={{
+          height: '110vh',
+          width: '100vw',
+          position: 'absolute',
+          right: '0'
+        }}
+        center={[-117.2201226, 32.860568]}
+        flyToOptions={{
+          speed: 5
+        }}
+        onClick={props.mapClick}
+        onStyleLoad={props.mapLoad}
+        pitch={[60]}
+        style="mapbox://styles/mapbox/streets-v11"
+        zoom={[15]}
+      >
+      </Map>
+    </div>
   );
 }
 
