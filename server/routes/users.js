@@ -1,7 +1,7 @@
 const router = require('express')();
 const f = require('../util/system');
 
-router.get('/', async (req, res) => res.json(await f.getUsers()));
+router.get('/', async (req, res) => res.json(await f.getUsers(true)));
 
 router.post('/login/', async (req, res) => {
     let username = req.body.name;
