@@ -62,6 +62,22 @@ const customLayer = {
   this.scene.add(gltf.scene);
   }.bind(this)
   ); 
+
+const topMaterial = new THREE.MeshBasicMaterial( { wireframe: false, opacity: 0 } );
+topMaterial.transparent = true;
+const sideMaterial = new THREE.MeshBasicMaterial( { color: 'orange'} );
+const bottomMaterial = new THREE.MeshBasicMaterial( { wireframe: false, opacity: 0 } );
+bottomMaterial.transparent = true;
+  const materials = [
+    sideMaterial,
+    topMaterial,
+    bottomMaterial
+  ]
+  const geometry = new THREE.CylinderGeometry(2000, 2000, 100, 100);
+  const mesh= new THREE.Mesh(geometry, materials);
+  this.obj = mesh;
+  this.scene.add(mesh);
+
   this.map = map;
    
   // use the Mapbox GL JS map canvas for three.js
@@ -111,6 +127,16 @@ const customLayer = {
   this.renderer.state.reset();
   this.renderer.render(this.scene, this.camera);
   this.map.triggerRepaint();
+  const animate = () => {
+    if(this.obj) {
+      requestAnimationFrame(animate);
+      this.obj.scale.x *= 0.9999
+      this.obj.scale.y *= 0.9999
+      this.obj.scale.z *= 0.9999
+    }
+  }
+  animate();
+
   }
   };
 
