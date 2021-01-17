@@ -170,7 +170,7 @@ router.get('/getCircleInfo/', async (req, res) => {
         res.json(gameData);
 });
 
-router.get('/getClosestSpellTome/', async (req, res) => {
+router.post('/getClosestSpellTome/', async (req, res) => {
     let username = req.body.name;
 
     if (username && username.length > 0) {
@@ -211,7 +211,7 @@ router.get('/getClosestSpellTome/', async (req, res) => {
     }
 });
 
-router.get('/getClosestOtherPlayer/', async (req, res) => {
+router.post('/getClosestOtherPlayer/', async (req, res) => {
     let username = req.body.name;
 
     if (username && username.length > 0) {
