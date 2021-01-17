@@ -198,6 +198,7 @@ router.post('/getClosestSpellTome/', async (req, res) => {
                 else
                     res.json(f.createSuccess({
                         spellTome: closestTome.id,
+                        spell: closestTome.spell,
                         distance: closestDist
                     }));
             } else {
