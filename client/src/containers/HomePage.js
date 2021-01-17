@@ -7,6 +7,7 @@ import ProgressBar from '../components/ProgressBar';
 import Map from '../components/Map';
 import { connect } from 'react-redux';
 import {pines, daisies, birches} from '../assets/constants.js';
+import fireball from '../assets/fireball.png';
 
 import {
   setPlayerLocation,
@@ -14,8 +15,8 @@ import {
   loadTomes,
   fireSpell,
 } from '../actions/MapActions';
-import { getClosestSpellTome, getClosestUser } from '../actions/ClosestActions';
-import { setPlayerCoords } from '../actions/UserActions';
+import { getClosestSpellTome, getClosestUser, learnSpell } from '../actions/ClosestActions';
+import { setPlayerCoords, getAllUsers, getPlayerHealth } from '../actions/UserActions';
 
 let lat1 = '';
 let lng1 = '';
@@ -43,12 +44,7 @@ const HomePageContainer = (props) => {
 
   // HANDLE DEVICE LOCATION AND PLAYER COORDINATES
   useEffect(() => {
-    const gameLoop = () => {
-      console.log('Updating');
-    }
-
     console.log('useEffect');
-    setInterval(gameLoop, 30000);
   }, []);
 
   const setPlayerLocation = (map, lat, lng) => {
@@ -71,11 +67,11 @@ const HomePageContainer = (props) => {
     const longitude = position.coords.longitude;
     props.setPlayerCoords(props.name, latitude, longitude);
     props.getClosestSpellTome(props.name);
-    console.log(latitude);
-    console.log(longitude);
     lat1 = latitude.toString();
     lng1 = longitude.toString();
     setPlayerLocation(window.map, latitude, longitude);
+    props.getAllUsers();
+    props.getPlayerHealth(props.name);
   }
   
   const errorGetPosition = () => {
@@ -99,19 +95,19 @@ const HomePageContainer = (props) => {
     props.fireSpell(map, lat1, lng1, lat2.toString(), lng2.toString());
   }
 
-  let hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning}/>
+  let hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning} arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>
   if (attack) {
-    hud = <AttackPage disableAttack={disableAttack} />;
+    hud = <AttackPage disableAttack={disableAttack} arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>;
   } else if (learning) {
-    hud = <ProgressBar disableLearning={disableLearning}/>;
+    hud = <ProgressBar disableLearning={disableLearning} name="Fireball" stats="10att 20sec cooldown" img={fireball} learnSpell={props.learnSpell}/>;
   } else {
-    hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning}/>
+    hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning} arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>
   }
 
   return (
     <>
       <OnboardingPage startLocation={startLocation}/>
-      <NavBar />
+      <NavBar alive={props.count} health={props.health}/>
       {hud}
       <Map mapClick={mapClick} mapLoad={mapLoad} />
     </>
@@ -122,11 +118,17 @@ const mapStateToProps = state => {
   return {
     name: state.user.name,
     lat: state.user.lat,
-    lng: state.user.long
+    lng: state.user.long,
+    count: state.alluser.count,
+    health: state.user.health,
+    arcane: state.user.arcane,
+    fireball: state.user.fireball,
+    icebolt: state.user.icebolt,
+    heal: state.user.heal
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fireSpell, getClosestSpellTome, loadTomes, loadTrees , setPlayerCoords, setPlayerLocation }
+  { learnSpell, getAllUsers, fireSpell, getClosestSpellTome, loadTomes, loadTrees , setPlayerCoords, setPlayerLocation, getPlayerHealth }
 )(HomePageContainer);

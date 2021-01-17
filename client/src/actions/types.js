@@ -1,5 +1,10 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const SET_PLAYER_COORDS = 'SET_PLAYER_COORDS';
+export const SET_PLAYER_HEALTH = 'SET_PLAYER_HEALTH';
 
 export const SET_CLOSEST_SPELL_TOME = 'SET_CLOSEST_SPELL_TOME';
+
+export const LEARN_ICE = 'LEARN_ICE';
+export const LEARN_FIREBALL = 'LEARN_FIREBALL';
+export const LEARN_HEAL = 'LEARN_HEAL';
