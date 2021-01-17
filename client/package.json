@@ -10,7 +10,7 @@
     "antd": "^4.10.2",
     "connected-react-router": "^6.8.0",
     "flickity": "^2.2.2",
-    "history": "^5.0.0",
+    "history": "4.10.1",
     "mapbox-gl": "^2.0.1",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
