@@ -3,7 +3,6 @@ import React from 'react';
 import Person from '../../assets/persona-a.svg';
 import Personua from '../../assets/persona-ua.svg';
 
-
 import './style.scss';
 
 const AmountAlive = (props) => {

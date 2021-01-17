@@ -12,7 +12,7 @@ const Navbar = (props) => {
         <img className="NavLogo" src={NavLogo} alt="logo" />
         <div className="in-col">
           <h3 className="hp">
-            {32}HP
+            {32}HP{' '}
             <span>
               <HeartFilled style={{ color: '#cd2828', fontSize: '28px' }} />
             </span>
