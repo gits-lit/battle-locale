@@ -78,6 +78,20 @@ const api = {
             }
         }
     },
+    deleteUser: async (username) => {
+        let ref = db.ref(`users/${username}`);
+        let result = await ref.once('value');
+        if (result.exists()) {
+            try {
+                await ref.remove();
+                return api.createSuccess();
+            } catch (e) {
+                return api.createError(`Error when deleting the user: ${e.message}`);
+            }
+        } else {
+            return api.createError(`User "${username}" does not exist.`);
+        }
+    },
     getUser: async (username) => {
         let ref = db.ref(`users/${username}`);
         let result = await ref.once('value');
@@ -138,6 +152,7 @@ const api = {
     },
     createGameStats: async () => {
         let ref = db.ref('gameStats');
+        
         let result = await ref.once('value');
         if (result.exists()) {
             return api.createError('Game has already started.');

@@ -35,8 +35,6 @@ const QueuePage= () => {
       <div className="queue">
         <p className="queue-text">in queue...</p>
         {checkPlayers()}
-      </div>
-      <div className="exit-link">
         <a className="exit-queue" href="/login">exit queue</a>
       </div>
     </div>
