@@ -1,0 +1,11 @@
+Model Information:
+* title:	crystal staff
+* source:	https://sketchfab.com/3d-models/crystal-staff-61f61c7538624c9c9d31572c12c44544
+* author:	myochii (https://sketchfab.com/myochii)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "crystal staff" (https://sketchfab.com/3d-models/crystal-staff-61f61c7538624c9c9d31572c12c44544) by myochii (https://sketchfab.com/myochii) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
