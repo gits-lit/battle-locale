@@ -8,10 +8,13 @@ import {
   setPlayerLocation,
   loadTrees,
   loadTomes,
+  fireSpell,
 } from '../actions/MapActions';
 import { getClosestSpellTome, getClosestUser } from '../actions/ClosestActions';
 import { setPlayerCoords } from '../actions/UserActions';
 
+let lat1 = '';
+let lng1 = '';
 
 const HomePageContainer = (props) => {
   const [flyTo, setFlyTo] = useState(true);
@@ -46,6 +49,10 @@ const HomePageContainer = (props) => {
     const longitude = position.coords.longitude;
     props.setPlayerCoords(props.name, latitude, longitude);
     props.getClosestSpellTome(props.name);
+    console.log(latitude);
+    console.log(longitude);
+    lat1 = latitude.toString();
+    lng1 = longitude.toString();
     setPlayerLocation(window.map, latitude, longitude);
   }
   
@@ -63,10 +70,17 @@ const HomePageContainer = (props) => {
     props.loadTomes(map);
   };
 
+  const mapClick = (map, event) => {
+    const coords = event.lngLat;
+    const lng2 = coords.lng;
+    const lat2 = coords.lat;
+    props.fireSpell(map, lat1, lng1, lat2.toString(), lng2.toString());
+  }
+
   return (
     <>
       <OnboardingPage startLocation={startLocation}/>
-      <Map mapLoad={mapLoad} />
+      <Map mapClick={mapClick} mapLoad={mapLoad} />
     </>
   );
 };
@@ -81,5 +95,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getClosestSpellTome, loadTomes, loadTrees , setPlayerCoords, setPlayerLocation }
+  { fireSpell, getClosestSpellTome, loadTomes, loadTrees , setPlayerCoords, setPlayerLocation }
 )(HomePageContainer);
