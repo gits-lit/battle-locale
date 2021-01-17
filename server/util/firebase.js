@@ -24,7 +24,7 @@ admin.initializeApp({
     databaseURL: process.env.FIREBASE_ADMIN_DATABASE_URL
 });
 
-// export the database service
+// export the firebase services
 module.exports = {
     database: firebase.database(),
     messaging: admin.messaging()

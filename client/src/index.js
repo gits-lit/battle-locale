@@ -15,6 +15,7 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import QueuePage from './containers/QueuePage';
 import GamePage from './components/GamePage';
+import requireAuth from './containers/requireAuth';
 
 const store = configureStore();
 
@@ -25,8 +26,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/game" component={GamePage} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/queue" component={QueuePage} />
-          <Route path="/" component={HomePage} />
+          <Route exact path="/queue" component={requireAuth(QueuePage)} />
+          <Route path="/" component={requireAuth(HomePage)} />
         </Switch>
       </>
     </ConnectedRouter>

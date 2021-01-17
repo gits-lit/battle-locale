@@ -1,4 +1,3 @@
-  
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createBrowserHistory } from 'history';
@@ -15,9 +14,9 @@ export default function configureStore(preloadedState) {
     compose(
       applyMiddleware(
         routerMiddleware(history), // for dispatching history actions
-        thunk,
-      ),
-    ),
+        thunk
+      )
+    )
   );
   return store;
 }
