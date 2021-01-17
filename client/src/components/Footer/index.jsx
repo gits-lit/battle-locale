@@ -1,32 +1,23 @@
 import React from 'react';
-import { HeartFilled } from '@ant-design/icons';
-import AmountAlive from '../../components/AmountAlive';
+import Weapons from '../../components/Weapons';
+
+import Learn from '../../assets/Learn.png';
+import Attack from '../../assets/Attack.png';
 
 import './style.scss';
-import NavLogo from '../../assets/NavLogo.png';
 
-const Navbar = (props) => {
+const Footer = (props) => {
   return (
-    <div className="Navbar">
-      <div className="top-row">
-        <img className="NavLogo" src={NavLogo} alt="logo" />
-        <div className="in-col">
-          <h3 className="hp">
-            {32}HP{' '}
-            <span>
-              <HeartFilled style={{ color: '#cd2828', fontSize: '28px' }} />
-            </span>
-          </h3>
-          <h3>3m 21s</h3>
-          <h4 className="alive">alive</h4>
+    <div className="footer">
+      <div className="footer-container">
+        <div className="button-row">
+          <img src={Learn} alt="learn" className="a-button" />
+          <img src={Attack} alt="attack" className="a-button" />
         </div>
-      </div>
-      <AmountAlive alive={8} />
-      <div className="notif-container">
-        <h4 className="notification">{props.notif}</h4>
+        <Weapons />
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default Footer;
