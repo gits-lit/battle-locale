@@ -1,0 +1,22 @@
+{
+   "arcane": {
+    "damage": 5,
+    "cooldown": 5,
+    "image": "https://i.imgur.com/byJwDe3.png"
+  },
+  "fireball": {
+    "damage": 10,
+    "cooldown": 10,
+    "image": "https://i.imgur.com/sEYfMeb.png"
+  },
+  "icebolt": {
+    "damage": 20,
+    "cooldown": 30,
+    "image": "https://i.imgur.com/wtjEbNj.png"
+  },
+  "heal": {
+    "damage": -20,
+    "cooldown": 120,
+    "image": "https://i.imgur.com/zAkttMj.png"
+  }
+}
