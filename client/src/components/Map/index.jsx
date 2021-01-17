@@ -2,6 +2,9 @@
 
 import React from 'react';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+import ProgressBar from '../ProgressBar';
 
 const Map = ReactMapboxGl({
   accessToken:
