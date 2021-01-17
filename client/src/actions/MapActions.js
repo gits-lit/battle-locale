@@ -4,6 +4,7 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 let playerLayers = [];
 let treeLayers = [];
+let spellLayer = [];
 
 export const setPlayerLocation = (map, lat, lng) => async dispatch => {
 
@@ -671,19 +672,173 @@ this.scene.add(directionalLight2);
   }
 }
 
-export const fireSpell = (map, lat, lng, targetLat, targetLng) => async dispatch => {
-  console.log(lat);
-  console.log(lng);
-  console.log(targetLat);
-  console.log(targetLng)
+export const fireSpell = (map, lat, lng, targetLat, targetLng, color) => async dispatch => {
+  let variable = 0;
+
+  // parameters to ensure the model is georeferenced correctly on the map
+  const modelOrigin = [lng, lat];
+  const modelAltitude = 0;
+  const modelRotate = [Math.PI / 2, - Math.PI / 4 + 0.1, 0];
+
+  const modelAsMercatorCoordinate = MercatorCoordinate.fromLngLat(
+    modelOrigin,
+    modelAltitude
+  );
+
+  const modelOrigin2 = [targetLng, targetLat];
+
+  const modelAsMercatorCoordinate2 = MercatorCoordinate.fromLngLat(
+    modelOrigin2,
+    modelAltitude
+  );
+
+  const modelTransform = {
+    translateX: modelAsMercatorCoordinate.x,
+    translateY: modelAsMercatorCoordinate.y,
+    translateZ: modelAsMercatorCoordinate.z,
+    rotateX: modelRotate[0],
+    rotateY: modelRotate[1],
+    rotateZ: modelRotate[2],
+    /* Since our 3D model is in real world meters, a scale transform needs to be
+    * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+    */
+    scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+  };
+
+  // Insert the layer beneath any symbol layer.
+  const layers = map.getStyle().layers;
+
+  let labelLayerId;
+  for (let i = 0; i < layers.length; i++) {
+    if (layers[i].type === 'custom') {
+    labelLayerId = layers[i].id;
+    }
+  }
+
+  const customLayer = {
+    id: 'spells' + lng.toString() + lat.toString(),
+    type: 'custom',
+    renderingMode: '3d',
+    onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+
+    // create two three.js lights to illuminate the model
+    const directionalLight = new THREE.DirectionalLight(0xeeeeee);
+    directionalLight.position.set(40, -70, 100).normalize();
+    this.scene.add(directionalLight);
+
+    const directionalLight2 = new THREE.DirectionalLight(0xeeeeee);
+    directionalLight2.position.set(40, 70, 100).normalize();
+    this.scene.add(directionalLight2);
+
+    const geometry = new THREE.SphereGeometry( 30, 30, 30 );
+    const material = new THREE.MeshBasicMaterial( {color: color} );
+    const cube = new THREE.Mesh( geometry, material );
+    this.obj = cube;
+    this.scene.add( cube );
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+    canvas: map.getCanvas(),
+    context: gl,
+    antialias: true
+    });
+
+    this.renderer.autoClear = false;
+    },
+    render: function(gl, matrix) {
+    const rotationX = new THREE.Matrix4().makeRotationAxis(
+    new THREE.Vector3(1, 0, 0),
+    modelTransform.rotateX
+    );
+    const rotationY = new THREE.Matrix4().makeRotationAxis(
+    new THREE.Vector3(0, 1, 0),
+    modelTransform.rotateY
+    );
+    const rotationZ = new THREE.Matrix4().makeRotationAxis(
+    new THREE.Vector3(0, 0, 1),
+    modelTransform.rotateZ
+    );
+
+    const m = new THREE.Matrix4().fromArray(matrix);
+    const l = new THREE.Matrix4()
+    .makeTranslation(
+    modelTransform.translateX,
+    modelTransform.translateY,
+    modelTransform.translateZ
+    )
+    .scale(
+    new THREE.Vector3(
+    modelTransform.scale,
+    -modelTransform.scale,
+    modelTransform.scale
+    )
+    )
+    .multiply(rotationX)
+    .multiply(rotationY)
+    .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.state.reset();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+    const initialPositionX = modelAsMercatorCoordinate.x / modelAsMercatorCoordinate.meterInMercatorCoordinateUnits();
+    const targetPositionX = modelAsMercatorCoordinate2.x / modelAsMercatorCoordinate.meterInMercatorCoordinateUnits();
+    const initialPositionY = modelAsMercatorCoordinate.y / modelAsMercatorCoordinate.meterInMercatorCoordinateUnits();
+    const targetPositionY = modelAsMercatorCoordinate2.y / modelAsMercatorCoordinate.meterInMercatorCoordinateUnits();
+    const animate = () => {
+      if(this.obj) {
+        if (variable != 100) {
+          requestAnimationFrame(animate);
+          this.obj.position.x += ((targetPositionX - initialPositionX) * .01 ); // You decide on the increment, higher value will mean the objects moves faster
+          this.obj.position.y -= ((targetPositionY - initialPositionY) * .01 ); // You decide on the increment, higher value will mean the objects moves faster
+          variable += 1
+        }
+        else {
+          clearSpell();
+        }
+      }
+    }
+    animate();
+    }
+  };
+  
+  try {
+    map.addLayer(customLayer, labelLayerId);
+    spellLayer.push(customLayer.id);
+    window.map = map;
+  }
+  catch (error) {
+    console.log('error')
+  }
+}
+
+const clearSpell = () => {
+  const map = window.map;
+  for (let i = 0; i < spellLayer.length; i++) {
+    map.removeLayer(spellLayer[i]);
+  }
+  spellLayer = [];
+
 }
 
 const clearMap = () => {
   const map = window.map;
+  console.log('clear')
 
   for (let i = 0; i < playerLayers.length; i++) {
     map.removeLayer(playerLayers[i]);
   }
+
+/*
+  for (let i = 0; i < treeLayers.length; i++) {
+    map.removeLayer(treeLayers[i]);
+  }
+*/
+
+
 
   playerLayers = [];
 }

@@ -92,7 +92,7 @@ const HomePageContainer = (props) => {
     const coords = event.lngLat;
     const lng2 = coords.lng;
     const lat2 = coords.lat;
-    props.fireSpell(map, lat1, lng1, lat2.toString(), lng2.toString());
+    props.fireSpell(map, lat1, lng1, lat2.toString(), lng2.toString(), '#dd5511');
   }
 
   let hud = <GamePage enableAttack={enableAttack} enableLearning={enableLearning} arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>
