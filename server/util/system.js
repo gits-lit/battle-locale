@@ -103,13 +103,18 @@ const api = {
             return api.createError(`User "${username}" does not exist.`);
         }
     },
-    getUsers: async () => {
+    getUsers: async (omitSpells = false) => {
         let ref = db.ref(`users`);
         let result = await ref.once('value');
         if (result.exists()) {
             let users = [];
-            for (let [username, data] of Object.entries(result.val()))
-                users.push(data);
+            for (let [username, data] of Object.entries(result.val())) {
+                let d = {...data};
+                if (omitSpells)
+                    d.spells = undefined;
+                
+                users.push(d);
+            }
             
             return api.createSuccess({
                 users
