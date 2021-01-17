@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import OnboardingPage from '../components/OnboardingPage';
 import Map from '../components/Map';
 import { connect } from 'react-redux';
+import {pines, daisies, birches} from '../assets/constants.js';
+
 import {
   setPlayerLocation,
-  loadPlayer,
+  loadTrees,
 } from '../actions/MapActions';
 
 import { setPlayerCoords } from '../actions/UserActions';
@@ -43,7 +45,7 @@ const HomePageContainer = (props) => {
 
   const mapLoad = map => {
     window.map = map;
-    loadPlayer(map);
+    loadTrees(map, pines, birches, daisies);
   };
 
   return (
@@ -63,5 +65,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { loadPlayer , setPlayerCoords, setPlayerLocation }
+  { loadTrees , setPlayerCoords, setPlayerLocation }
 )(HomePageContainer);

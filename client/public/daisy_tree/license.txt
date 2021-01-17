@@ -1,0 +1,11 @@
+Model Information:
+* title:	daisy tree
+* source:	https://sketchfab.com/3d-models/daisy-tree-1844855e1c7b48cca6ea381df99b44a8
+* author:	myochii (https://sketchfab.com/myochii)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "daisy tree" (https://sketchfab.com/3d-models/daisy-tree-1844855e1c7b48cca6ea381df99b44a8) by myochii (https://sketchfab.com/myochii) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -19,6 +19,7 @@ app.get('/', (req, res) => res.send("Battle Locale's server :)"));
 // set up the API routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/game', require('./routes/game'));
+app.use('/api/notifications', require('./routes/notifications'));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}.`));
