@@ -13,8 +13,8 @@ const Navbar = (props) => {
         <div className="in-col">
           <h3 className="hp">
             {32}HP
-            <span>
-              <HeartFilled style={{ color: '#cd2828', fontSize: '28px' }} />
+            <span className="heart">
+              💖
             </span>
           </h3>
           <h3>3m 21s</h3>

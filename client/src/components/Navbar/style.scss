@@ -8,9 +8,9 @@
   height: 245px;
 
   .notif-container {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .notification {
@@ -39,6 +39,10 @@
         font-size: 22px;
         margin-bottom: 15px;
         letter-spacing: 0.1em;
+
+        .heart {
+          font-size: 26px;
+        }
       }
 
       .alive {
