@@ -14,9 +14,14 @@ router.post('/subtractHealth/', async (req, res) => {
                 value = parseInt(value);
 
                 if (!isNaN(value)) {
-                    res.json(await f.updateUser(username, {
-                        health: Math.max(userData.health - value, 0)
-                    }));
+                    let newHp = (userData.health - value);
+                    if (newHp <= 0)
+                        // dead so delete from database
+                        res.json(await f.deleteUser(username));
+                    else
+                        res.json(await f.updateUser(username, {
+                            health: newHp
+                        }));
                 } else {
                     // invalid value
                     res.json(f.createError(`The value provided "${req.body.value}" is not a valid value.`));
