@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, LOGIN_USER, SET_PLAYER_COORDS } from './types';
+import { GET_ALL_USERS, LOGIN_USER, SET_PLAYER_COORDS, SET_PLAYER_HEALTH } from './types';
 import { replace } from 'connected-react-router';
 
 export const setPlayerCoords = (name, lat, long) => async dispatch => {
@@ -75,6 +75,26 @@ export const getAllUsers = () => async dispatch => {
     dispatch({
       type: GET_ALL_USERS,
       payload: data.users
+    });
+}
+
+export const getPlayerHealth = (name) => async dispatch => {
+  const response = await fetch(`https://battle-locale.herokuapp.com/api/users/getUserHealth?name=${name}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+
+    const data = await response.json();
+    console.log(data);
+    if (!data) throw new Error('Empty response from server');
+    if (data.error) throw new Error(data.error.message);
+
+    dispatch({
+      type: SET_PLAYER_HEALTH,
+      payload: data.health
     });
 }
 

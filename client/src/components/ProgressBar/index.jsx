@@ -17,6 +17,7 @@ const ProgressBar = (props) => {
       interval = setInterval(() => {
         setProgress(progress => progress + 10);
         if(progress === 100) {
+          props.learnSpell(props.name);
           props.disableLearning();
         }
       }, 1000);

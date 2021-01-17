@@ -7,7 +7,7 @@ module.exports = {
     "spell2": { // near peppercanyon
         lat: 32.87798011889111,
         long: -117.23418411615695,
-        spell: undefined
+        spell: 'fireball'
     },
     // "spell3": { // warren mall
     //     lat: 32.88111792916514,
@@ -22,12 +22,12 @@ module.exports = {
     "spell5": { // market (village)
         lat: 32.88765617860503,
         long: -117.2422649414358,
-        spell: undefined
+        spell: 'fireball'
     },
     "spell6": { // regents pizzeria
         lat: 32.87333553776492,
         long: -117.21805394334086,
-        spell: undefined
+        spell: 'fireball'
     },
     // "spell7": { // old sixth apt (near the bridge)
     //     lat: 32.87707537994171,
@@ -37,12 +37,12 @@ module.exports = {
     "spell8": { // near CV, warren
         lat: 32.88389154204856,
         long: -117.2330091738471,
-        spell: undefined
+        spell: 'fireball'
     },
     "spell9": { // tapex (not the one on campus, but near vons)
         lat: 32.86275177428726,
         long: -117.22469404881787,
-        spell: undefined
+        spell: 'fireball'
     },
     // "spell10": { // wholes food market
     //     lat: 32.868817722514265,
@@ -67,12 +67,12 @@ module.exports = {
     "spell14": { // gliderport, near blacks beach lookout
         lat: 32.889292454864375,
         long: -117.25092413404293,
-        spell: undefined
+        spell: 'fireball'
     },
     "spell15": { // near price center loop
         lat: 32.88035540832258,
         long: -117.23585146053931,
-        spell: undefined
+        spell: 'fireball'
     },
     // "spell16": { // near club med
     //     lat: 32.8757768828483,
@@ -82,7 +82,7 @@ module.exports = {
     "spell17": { // near canyon view
         lat: 32.880585986733365,
         long: -117.23159448933886,
-        spell: undefined
+        spell: 'fireball'
     },
     // "spell18": { // OVT
     //     lat: 32.88298144692996,
@@ -97,6 +97,6 @@ module.exports = {
     "spell20": { // RIMAC
         lat: 32.88519784832526,
         long: -117.24067427073682,
-        spell: undefined
+        spell: 'fireball'
     }
 };

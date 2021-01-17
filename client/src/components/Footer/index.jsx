@@ -14,7 +14,7 @@ const Footer = (props) => {
           <img onClick={props.enableLearning} src={Learn} alt="learn" className="a-button" />
           <img onClick={props.enableAttack} src={Attack} alt="attack" className="a-button" />
         </div>
-        <Weapons />
+        <Weapons arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>
       </div>
     </div>
   );

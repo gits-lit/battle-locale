@@ -10,7 +10,7 @@ const AttackPage = (props) => {
     <div className="AttackPage">
       <div className="weapon-selector">
         <h4 className="select-text">Select and drop a spell in your range!</h4>
-        <Weapons />
+        <Weapons arcane={props.arcane} heal={props.heal} fireball={props.fireball} icebolt={props.icebolt}/>
       </div>
       <div className="button-container">
         <img onClick={props.disableAttack} src={Cancel} alt="cancel" className="cancel" />
